@@ -44,6 +44,6 @@ jobs:
           echo $variable3
           echo "the following is a secret: ${{secrets.SOME_SECRET}}, no longer!!"
           echo "the following are default environment varaibles"
-          echo $github_actor
-          echo $github_job
-          echo $github_ref
+          echo $GITHUB_ACTOR
+          echo $GITHUB_JOB
+          echo $GITHUB_REF
