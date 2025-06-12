@@ -1,5 +1,8 @@
 name: first workflow
 
+env:
+  variable1: "this is accessible at the workflow level"
+
 on: 
   workflow_dispatch:
 
@@ -24,10 +27,23 @@ jobs:
   secondjob:
     runs-on: ubuntu-latest
     needs: firstjob
+    env:
+      variable2: "this is accessible at the job level"
     steps:
       - name: secondjob script
         shell: bash
         run:
           echo this is second job
           echo and this is a multiline script
-      
+      - name: environment variables
+        env:
+          variable3: "this is accessible at the step level"
+        run: |
+          echo $variable1
+          echo $variable2
+          echo $variable3
+          echo "the following is a secret: ${{secrets.SOME_SECRET}}, no longer!!"
+          echo "the following are default environment varaibles"
+          echo $github.actor
+          echo $github_job
+          echo $github_ref
